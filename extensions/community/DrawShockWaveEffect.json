@@ -8,7 +8,7 @@
   "name": "DrawShockWaveEffect",
   "previewIconUrl": "https://resources.gdevelop-app.com/assets/Icons/octagram-outline.svg",
   "shortDescription": "Will allow you to draw shock wave effects.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": [
     "This behavior must be assigned to a shape painter object.",
     "The user will have state parameters (Start and End) like the particle emitter object, which are :",
@@ -28,11 +28,15 @@
     "PS: the shape-painter will be automatically deleted once the animation is finished.",
     ""
   ],
+  "origin": {
+    "identifier": "DrawShockWaveEffect",
+    "name": "gdevelop-extension-store"
+  },
   "tags": [
-    "Drawing",
-    "Color",
-    "Opacity",
-    "Outline"
+    "drawing",
+    "color",
+    "opacity",
+    "outline"
   ],
   "authorIds": [
     "QjE1CI3drHNR9Wklz2gTC5WbEgh1"
@@ -93,7 +97,7 @@
                 "value": "SetReturnNumber"
               },
               "parameters": [
-                "ToNumber(SubStr(GetArgumentAsString(\"Color\"),StrFind(GetArgumentAsString(\"Color\"),\";\")+1,StrLength(GetArgumentAsString(\"Color\")) - StrFindLast(GetArgumentAsString(\"Color\"),\";\")))"
+                "ToNumber(SubStr(GetArgumentAsString(\"Color\"), StrFind(GetArgumentAsString(\"Color\"), \";\")+1, StrFindLast(GetArgumentAsString(\"Color\"), \";\") - StrFind(GetArgumentAsString(\"Color\"), \";\")-1))"
               ]
             }
           ]
@@ -161,6 +165,7 @@
               "colorG": 176,
               "colorR": 74,
               "creationTime": 0,
+              "folded": true,
               "name": "__Init Value",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -263,7 +268,6 @@
               "colorG": 176,
               "colorR": 74,
               "creationTime": 0,
-              "folded": true,
               "name": "Tween transitions",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -273,152 +277,140 @@
                   "conditions": [
                     {
                       "type": {
-                        "value": "BuiltinCommonInstructions::Once"
+                        "value": "VarObjet"
                       },
-                      "parameters": []
+                      "parameters": [
+                        "Object",
+                        "__DrawEllipseShockWave__.Pond",
+                        "<",
+                        "Object.Behavior::PropertyDuration()"
+                      ]
                     }
                   ],
                   "actions": [
                     {
                       "type": {
-                        "value": "Tween::AddObjectVariableTween"
+                        "value": "ModVarObjet"
                       },
                       "parameters": [
                         "Object",
-                        "Behaviors",
-                        "\"Width\"",
+                        "__DrawEllipseShockWave__.Pond",
+                        "+",
+                        "TimeDelta()"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "Object",
                         "__DrawEllipseShockWave__.Width",
-                        "Object.Behavior::PropertyStart1Width()",
-                        "Object.Behavior::PropertyEnd1Width()",
-                        "Object.Behavior::PropertyTweenName()",
-                        "Object.Behavior::PropertyDuration()",
-                        ""
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), Object.Behavior::PropertyStart1Width(), Object.Behavior::PropertyEnd1Width(), normalize(Object.Variable(__DrawEllipseShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
                       ]
                     },
                     {
                       "type": {
-                        "value": "Tween::AddObjectVariableTween"
+                        "value": "ModVarObjet"
                       },
                       "parameters": [
                         "Object",
-                        "Behaviors",
-                        "\"Height\"",
                         "__DrawEllipseShockWave__.Height",
-                        "Object.Behavior::PropertyStart2Height()",
-                        "Object.Behavior::PropertyEnd2Height()",
-                        "Object.Behavior::PropertyTweenName()",
-                        "Object.Behavior::PropertyDuration()",
-                        ""
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), Object.Behavior::PropertyStart2Height(), Object.Behavior::PropertyEnd2Height(), normalize(Object.Variable(__DrawEllipseShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
                       ]
                     },
                     {
                       "type": {
-                        "value": "Tween::AddObjectVariableTween"
+                        "value": "ModVarObjet"
                       },
                       "parameters": [
                         "Object",
-                        "Behaviors",
-                        "\"Outline\"",
                         "__DrawEllipseShockWave__.Outline",
-                        "Object.Behavior::PropertyStart3Outline()",
-                        "Object.Behavior::PropertyEnd3Outline()",
-                        "Object.Behavior::PropertyTweenName()",
-                        "Object.Behavior::PropertyDuration()",
-                        "yes"
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), Object.Behavior::PropertyStart3Outline(), Object.Behavior::PropertyEnd3Outline(), normalize(Object.Variable(__DrawEllipseShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
                       ]
                     },
                     {
                       "type": {
-                        "value": "Tween::AddObjectVariableTween"
+                        "value": "ModVarObjet"
                       },
                       "parameters": [
                         "Object",
-                        "Behaviors",
-                        "\"Opacity\"",
                         "__DrawEllipseShockWave__.Opacity",
-                        "Object.Behavior::PropertyStart5Opacity()",
-                        "Object.Behavior::PropertyEnd5Opacity()",
-                        "Object.Behavior::PropertyTweenName()",
-                        "Object.Behavior::PropertyDuration()",
-                        ""
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), Object.Behavior::PropertyStart5Opacity(), Object.Behavior::PropertyEnd5Opacity(), normalize(Object.Variable(__DrawEllipseShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
                       ]
                     },
                     {
                       "type": {
-                        "value": "Tween::AddObjectVariableTween"
+                        "value": "ModVarObjet"
                       },
                       "parameters": [
                         "Object",
-                        "Behaviors",
-                        "\"Angle\"",
                         "__DrawEllipseShockWave__.Angle",
-                        "Object.Behavior::PropertyStart6Angle()",
-                        "Object.Behavior::PropertyEnd6Angle()",
-                        "Object.Behavior::PropertyTweenName()",
-                        "Object.Behavior::PropertyDuration()",
-                        ""
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), Object.Behavior::PropertyStart6Angle(), Object.Behavior::PropertyEnd6Angle(), normalize(Object.Variable(__DrawEllipseShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
                       ]
                     },
                     {
                       "type": {
-                        "value": "Tween::AddObjectColorTween"
+                        "value": "ModVarObjet"
                       },
                       "parameters": [
                         "Object",
-                        "Behaviors",
-                        "\"Color\"",
-                        "Object.Behavior::PropertyEnd4Color()",
-                        "Object.Behavior::PropertyTweenName()",
-                        "Object.Behavior::PropertyDuration()",
-                        "Object.Behavior::PropertyTweenName()",
+                        "__DrawEllipseShockWave__.Red",
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyStart4Color(), \"Red\"),DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyEnd4Color(), \"Red\"), normalize(Object.Variable(__DrawEllipseShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawEllipseShockWave__.Green",
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyStart4Color(), \"Green\"),DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyEnd4Color(), \"Green\"), normalize(Object.Variable(__DrawEllipseShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawEllipseShockWave__.Blue",
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyStart4Color(), \"Blue\"),DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyEnd4Color(), \"Blue\"), normalize(Object.Variable(__DrawEllipseShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "VarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawEllipseShockWave__.Pond",
+                        ">",
                         "Object.Behavior::PropertyDuration()"
                       ]
-                    },
+                    }
+                  ],
+                  "actions": [
                     {
                       "type": {
-                        "value": "Tween::AddObjectVariableTween"
+                        "value": "Delete"
                       },
                       "parameters": [
                         "Object",
-                        "Behaviors",
-                        "\"Red\"",
-                        "__DrawEllipseShockWave__.Red",
-                        "DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyStart4Color(), \"Red\")",
-                        "DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyEnd4Color(), \"Red\")",
-                        "Object.Behavior::PropertyTweenName()",
-                        "Object.Behavior::PropertyDuration()",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "Tween::AddObjectVariableTween"
-                      },
-                      "parameters": [
-                        "Object",
-                        "Behaviors",
-                        "\"Blue\"",
-                        "__DrawEllipseShockWave__.Blue",
-                        "DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyStart4Color(), \"Blue\")",
-                        "DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyEnd4Color(), \"Blue\")",
-                        "Object.Behavior::PropertyTweenName()",
-                        "Object.Behavior::PropertyDuration()",
-                        ""
-                      ]
-                    },
-                    {
-                      "type": {
-                        "value": "Tween::AddObjectVariableTween"
-                      },
-                      "parameters": [
-                        "Object",
-                        "Behaviors",
-                        "\"Green\"",
-                        "__DrawEllipseShockWave__.Green",
-                        "DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyStart4Color(), \"Green\")",
-                        "DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyEnd4Color(), \"Green\")",
-                        "Object.Behavior::PropertyTweenName()",
-                        "Object.Behavior::PropertyDuration()",
                         ""
                       ]
                     }
@@ -1218,7 +1210,7 @@
             {
               "description": "Tween animation",
               "name": "Name",
-              "supplementaryInformation": "[\"easeOutSine\",\"linear\",\"easeOutQuad\",\"easeOutCubic\",\"easeOutQuart\",\"easeOutQuint\",\"easeOutExpo\",\"easeOutCirc\"]",
+              "supplementaryInformation": "[\"easeOutSine\",\"linear\",\"easeOutQuad\",\"easeOutCubic\",\"easeOutQuart\",\"easeOutQuint\",\"easeOutExpo\",\"easeOutCirc\",\"easeInQuad\",\"easeInCubic\",\"easeInQuart\",\"easeInQuint\",\"easeInCirc\"]",
               "type": "stringWithSelector"
             }
           ],
@@ -1285,7 +1277,7 @@
           "value": "8",
           "type": "Number",
           "unit": "Pixel",
-          "label": "Width",
+          "label": "Start width",
           "description": "",
           "group": "1.Start",
           "extraInformation": [],
@@ -1349,7 +1341,7 @@
           "value": "64",
           "type": "Number",
           "unit": "Pixel",
-          "label": "Width",
+          "label": "End width",
           "description": "",
           "group": "2.End",
           "extraInformation": [],
@@ -1410,24 +1402,12 @@
           "name": "End6Angle"
         },
         {
-          "value": "",
-          "type": "Behavior",
-          "label": "",
-          "description": "",
-          "group": "Behavior",
-          "extraInformation": [
-            "Tween::TweenBehavior"
-          ],
-          "hidden": false,
-          "name": "Behaviors"
-        },
-        {
-          "value": "1000",
+          "value": "1",
           "type": "Number",
           "unit": "Second",
-          "label": "Duration in milliseconds",
+          "label": "Duration in seconds",
           "description": "",
-          "group": "Behavior",
+          "group": "Animation",
           "extraInformation": [],
           "hidden": false,
           "name": "Duration"
@@ -1437,7 +1417,7 @@
           "type": "Choice",
           "label": "Name of tween",
           "description": "",
-          "group": "Behavior",
+          "group": "Animation",
           "extraInformation": [
             "easeOutSine",
             "linear",
@@ -1446,7 +1426,13 @@
             "easeOutQuart",
             "easeOutQuint",
             "easeOutExpo",
-            "easeOutCirc"
+            "easeInCirc",
+            "easeInQuad",
+            "easeInCubic",
+            "easeInQuart",
+            "easeInQuint",
+            "easeInExpo",
+            "easeInCirc"
           ],
           "hidden": false,
           "name": "TweenName"
@@ -1538,7 +1524,6 @@
               "colorG": 176,
               "colorR": 74,
               "creationTime": 0,
-              "folded": true,
               "name": "__Init Value",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -1652,7 +1637,163 @@
               "colorG": 176,
               "colorR": 74,
               "creationTime": 0,
-              "folded": true,
+              "name": "Tween transitions",
+              "source": "",
+              "type": "BuiltinCommonInstructions::Group",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "VarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawStarShockWave__.Pond",
+                        "<",
+                        "Object.Behavior::PropertyDuration()"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawStarShockWave__.Pond",
+                        "+",
+                        "TimeDelta()"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawStarShockWave__.Radius",
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), Object.Behavior::PropertyStart1Radius(), Object.Behavior::PropertyEnd1Radius(), normalize(Object.Variable(__DrawStarShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawStarShockWave__.InnerRadius",
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), Object.Behavior::PropertyStart2InnerRadius(), Object.Behavior::PropertyEnd2InnerRadius(), normalize(Object.Variable(__DrawStarShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawStarShockWave__.Outline",
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), Object.Behavior::PropertyStart3Outline(), Object.Behavior::PropertyEnd3Outline(), normalize(Object.Variable(__DrawStarShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawStarShockWave__.Opacity",
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), Object.Behavior::PropertyStart5Opacity(), Object.Behavior::PropertyEnd5Opacity(), normalize(Object.Variable(__DrawStarShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawStarShockWave__.Angle",
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), Object.Behavior::PropertyStart6Angle(), Object.Behavior::PropertyEnd6Angle(), normalize(Object.Variable(__DrawStarShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawStarShockWave__.Red",
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyStart4Color(), \"Red\"),DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyEnd4Color(), \"Red\"), normalize(Object.Variable(__DrawStarShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawStarShockWave__.Green",
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyStart4Color(), \"Green\"),DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyEnd4Color(), \"Green\"), normalize(Object.Variable(__DrawStarShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
+                      ]
+                    },
+                    {
+                      "type": {
+                        "value": "ModVarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawStarShockWave__.Blue",
+                        "=",
+                        "Tween::Ease(Object.Behavior::PropertyTweenName(), DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyStart4Color(), \"Blue\"),DrawShockWaveEffect::GetPrimaryColor(Object.Behavior::PropertyEnd4Color(), \"Blue\"), normalize(Object.Variable(__DrawStarShockWave__.Pond),0,Object.Behavior::PropertyDuration()))"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "VarObjet"
+                      },
+                      "parameters": [
+                        "Object",
+                        "__DrawStarShockWave__.Pond",
+                        ">",
+                        "Object.Behavior::PropertyDuration()"
+                      ]
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "Delete"
+                      },
+                      "parameters": [
+                        "Object",
+                        ""
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": []
+            },
+            {
+              "colorB": 228,
+              "colorG": 176,
+              "colorR": 74,
+              "creationTime": 0,
+              "disabled": true,
               "name": "Tween transitions",
               "source": "",
               "type": "BuiltinCommonInstructions::Group",
@@ -2822,23 +2963,11 @@
           "name": "End6Angle"
         },
         {
-          "value": "",
-          "type": "Behavior",
-          "label": "",
-          "description": "",
-          "group": "Behavior",
-          "extraInformation": [
-            "Tween::TweenBehavior"
-          ],
-          "hidden": false,
-          "name": "Behaviors"
-        },
-        {
-          "value": "1000",
+          "value": "1",
           "type": "Number",
-          "label": "Duration in milliseconds",
+          "label": "Duration in seconds",
           "description": "",
-          "group": "Behavior",
+          "group": "Animation",
           "extraInformation": [],
           "hidden": false,
           "name": "Duration"
@@ -2848,7 +2977,7 @@
           "type": "Choice",
           "label": "Name of tween",
           "description": "",
-          "group": "Behavior",
+          "group": "Animation",
           "extraInformation": [
             "easeOutSine",
             "linear",
